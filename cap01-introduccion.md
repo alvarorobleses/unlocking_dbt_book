@@ -25,8 +25,15 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 
 ## Notas personales
 
-> Aquí puedes agregar tus propias reflexiones o dudas del capítulo.
+> Debemos hacernos unas preguntas antes de decidir crear un warehouse, podemos considerarlo si nuestras respuestas dan 'si' en cada una de las siguientes preguntas:
 
----
+° Is it important to have a single source of truth for your data?
+• Are multiple areas of the business going to be consuming this data?
+• Do we need to analyze data from different sources?
+• Do we need to maintain historical tracking of data and make sure we
+are looking at measurables from a point in time?
+• Do you have a high volume of data that needs to be transformed?
+• Do you find yourself running a lot of complex queries regularly?
+
 
 *Fuente: Unlocking dbt — Capítulo 1*
