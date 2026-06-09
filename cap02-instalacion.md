@@ -42,6 +42,7 @@ Algunos de los más comunes:
 Lista completa: [docs.getdbt.com/docs/supported-data-platforms](https://docs.getdbt.com/docs/supported-data-platforms)
 
 ## Configuración de snowflake previa
+Obtenido del libro: Data engineering with dbt a practical guide to building a cloud based pragmatic and dependable data platform with sql
 ```bash
 SHOW ROLES;
 SHOW GRANTS TO ROLE ACCOUNTADMIN;
@@ -97,7 +98,6 @@ FROM table_1
 -- Para el proceso de integración de dbt con snowflake, ésta es la estructura del account: twc21298.us-east-1
 SELECT CURRENT_ACCOUNT(), CURRENT_REGION();
 SELECT CURRENT_ACCOUNT_NAME(), CURRENT_REGION(), SYSTEM$ALLOWLIST();
--- Obtenido del libro: Data engineering with dbt a practical guide to building a cloud based pragmatic and dependable data platform with sql
 ```
 
 ## Flujo para inicializar el proyecto y comando debug
