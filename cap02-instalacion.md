@@ -171,8 +171,14 @@ seeds:
 
 snapshots:
 ```
-## Notas personales
+### Probando la configuración...
+Para comprobar que toda nuestra configuración local y cloud inicial fue correcta, utilizaremos el comando
+```bash
+dbt debug
+```
+<img width="1759" height="964" alt="debug" src="https://github.com/user-attachments/assets/25ad62f0-6a8e-4f73-b9a7-d699b12dfe0a" />
 
+## Notas personales
 
 > Reflexiones o dudas del capítulo.
 
