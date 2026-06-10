@@ -38,7 +38,7 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 *Fuente: Unlocking dbt — Capítulo 1*
 
 ## Proceso Git - Git Hub para el proyecto
-
+```bash
 1. Conectar tu carpeta local con GitHub
   git remote add origin https://github.com/tu-usuario/my_first_dbt_project.git
 2. Agregar todos los archivos al staging
@@ -47,7 +47,7 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
   git commit -m "feat: initial project structure with dbt + uv setup"
 4. Subimos a Git Hub
   git push -u origin main
-
+```
 ## Proceso para generar el token de Git Hub
 
 - Ve a github.com → tu foto de perfil → Settings
