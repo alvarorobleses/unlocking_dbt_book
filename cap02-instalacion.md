@@ -239,7 +239,7 @@ La finalidad de esta carpeta es almacenar conjuntos de datos maestros (master da
 
 ## Notas personales
 
-> Reflexiones o dudas del capítulo.
+> El modelado en el libro se inclinará a un star schema.
 
 ---
 
