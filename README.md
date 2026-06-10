@@ -61,16 +61,27 @@ deactivate
 
 ## 📁 Estructura del proyecto
 
-```
-my_first_dbt_project/
-├── README.md                   ← estás aquí
+```bash
+unlocking_dbt_book/
+├── README.md
+│
 ├── docs/
 │   ├── cap01-introduccion.md
 │   ├── cap02-instalacion.md
-│   └── decisiones-tecnicas.md
-├── models/                     ← modelos dbt (se irán agregando)
-├── .gitignore
-└── pyproject.toml
+│   ├── decisiones-tecnicas.md
+│   └── ...
+│
+└── my_first_dbt_project/
+    ├── analyses/
+    ├── macros/
+    ├── models/
+    ├── seeds/
+    ├── snapshots/
+    ├── tests/
+    ├── dbt_project.yml
+    ├── profiles.yml
+    ├── README.md
+    └── .gitignore
 ```
 
 ---
