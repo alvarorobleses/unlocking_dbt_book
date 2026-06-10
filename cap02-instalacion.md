@@ -235,12 +235,24 @@ models/
     └── dim_stores.sql
 └── marts/
 ```
-La finalidad de esta carpeta es almacenar conjuntos de datos maestros (master data) que representan entidades centrales del negocio, como clientes, productos o tiendas. Estos modelos pueden ser reutilizados por varios data marts sin depender de un área funcional específica, también estas tablas suelen actuar como fact tables (las que contienen los datos medibles).
+La finalidad de esta carpeta es almacenar conjuntos de datos maestros (master data) que representan entidades centrales del negocio, como clientes, productos o tiendas. Estos modelos pueden ser reutilizados por varios data marts sin depender de un área funcional específica, también estas tablas suelen actuartarget/
+dbt_packages/
+logs/
+dbt-local-dev-env/
+profiles.yml
+.env como fact tables (las que contienen los datos medibles).
 
 ## Notas personales
 
-> El modelado en el libro se inclinará a un star schema.
-
+> No olvidar las buenas prácticas de no subir información confidencial a git hub, por ello crear un .gitignore en la carpeta del proyecto con la siguiente información:
+```bash
+target/
+dbt_packages/
+logs/
+dbt-local-dev-env/
+profiles.yml
+.env
+```
 ---
 
 *Fuente: Unlocking dbt — Capítulo 2*
