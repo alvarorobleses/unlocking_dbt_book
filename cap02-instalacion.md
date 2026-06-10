@@ -15,16 +15,12 @@ Ver [decisiones-tecnicas.md](decisiones-tecnicas.md) para más contexto.
 # 1. Crear carpeta y entrar
 mkdir my_first_dbt_project
 cd my_first_dbt_project
-
 # 2. Crear entorno virtual
 uv venv dbt-local-dev-env
-
 # 3. Activar
 source dbt-local-dev-env/bin/activate
-
 # 4. Instalar dbt con adaptador Snowflake
 uv pip install dbt-snowflake
-
 # 5. Verificar
 dbt --version
 uv pip show dbt-snowflake
@@ -177,6 +173,65 @@ Para comprobar que toda nuestra configuración local y cloud inicial fue correct
 dbt debug
 ```
 <img width="1759" height="964" alt="debug" src="https://github.com/user-attachments/assets/25ad62f0-6a8e-4f73-b9a7-d699b12dfe0a" />
+
+## Estructura del Directorio
+Luego de crear el proyecto mediante el 'dbt init', dbt generó una estructura de directorios que organizará el proyecto
+```bash
+my_first_dbt_project/
+├── analyses/    # Destinado a consultas sql para análisis, no forman parte del pipeline productivo
+├── macros/    # Almacena funciones reutilizables escritas, facilita la automatización.
+├── models/    # Aquí irán los modelos SQL que dbt transformará en tablas o vistas en snowflake.
+├── seeds/
+├── snapshots/
+├── tests/
+├── dbt_project.yml
+├── profiles.yml
+└── README.md
+```
+### Organización recomendada de models
+En Unlocking dbt, los autores recomiendan organizar los modelos siguiendo una arquitectura de tres capas:
+```bash
+models/
+├── staging/
+├── intermediate/
+└── marts/
+```
+La capa staging es la más cercana a los datos fuente, su objetivo es estandarizar nombres de columnas, corregir tipos de datos, aplicar limpieza básica,etc.
+Los autores recomiendan organizar los modelos por una carpeta para cada sistema fuente y utilizar la convención:
+```bash
+stg_<fuente>_<entidad>
+Ejemplo:
+stg_crm_customers
+stg_crm_orders
+stg_furniture_mart_products
+```
+La capa intermediate contiene transformaciones más complejas, joins entre modelos, aplicación de reglas de negocio, reestructuración de datos.
+```bash
+stg_customers
+stg_orders
+      ↓
+int_customer_orders
+```
+La capa marts contiene los modelos finales consumidos por usuarios de negocio, dashboards y herramientas de visualización.
+```bash
+marts/
+├── finance/
+    ├── mart_customer_revenue/
+└── operations/
+```
+### Masterdata (opcional)
+El libro propone añadir una carpeta adicional llamada masterdata, la cual no forma parte de la estructura estándar de dbt, pero resulta útil cuando existen dimensiones compartidas entre múltiples data marts, como por ejemplo cuando hablamos de los clientes, nos podemos preguntar ¿A qué área funcional debería pertenecer?.
+```bash
+models/
+├── staging/
+├── intermediate/
+├── masterdata/
+    ├── dim_customers.sql
+    ├── dim_products.sql
+    └── dim_stores.sql
+└── marts/
+```
+La finalidad de esta carpeta es almacenar conjuntos de datos maestros (master data) que representan entidades centrales del negocio, como clientes, productos o tiendas. Estos modelos pueden ser reutilizados por varios data marts sin depender de un área funcional específica, también estas tablas suelen actuar como fact tables (las que contienen los datos medibles).
 
 ## Notas personales
 
