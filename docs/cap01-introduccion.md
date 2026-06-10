@@ -37,7 +37,7 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 
 *Fuente: Unlocking dbt — Capítulo 1*
 
-## Proceso Git - Git Hub para el proyecto
+## Flujo Git - Git Hub inicio
 ```bash
 1. Conectar tu carpeta local con GitHub
   git remote add origin https://github.com/tu-usuario/my_first_dbt_project.git
@@ -48,6 +48,17 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 4. Subimos a Git Hub
   git push -u origin main
 ```
+
+## Flujo Git - Git Hub para la documentación del proyecto
+```bash
+1. Editamos la carpeta docs/ desde git hub, al empezar descargamos los archivos a local
+git pull --rebase origin main
+2. Trabajamos el proyecto localmente, para terminar hacemos
+git add .
+git commit -m "..."
+git push origin main
+```
+
 ## Proceso para generar el token de Git Hub
 
 - Ve a github.com → tu foto de perfil → Settings
