@@ -97,8 +97,12 @@ SELECT CURRENT_ACCOUNT_NAME(), CURRENT_REGION(), SYSTEM$ALLOWLIST();
 ```
 
 ## Flujo para inicializar el proyecto y comando debug
-Para inicializar el proyecto, crear las carpetas y archivos por defecto ubicándonos en la carpeta del proyecto con 'cd' usaremos el comando
-dbt init
+Para inicializar el proyecto, crear las carpetas y archivos por defecto realizaremos:
+```bash
+mkdir proyecto_dbt
+cd proyecto_dbt
+dbt init .
+```
 Se mostrará una serie de datos para que ingresemos referenciando a la configuración cloud con snowflake y del proyecto, creará en una carpeta oculta .dbt ubicada en el disco local de configuraciones junto a otras carpetas de otros programas dependiendo del sistema operativo, dentro un archivo llamado profiles.yml, el cual podemos volver a configurar, cabe mencionar que el proyecto usará por defecto este archivo, tenemos la opción de usar uno priorizable creándolo dentro de la carpeta del proyecto.
 ### Archivo profiles.yml
 El archivo profiles.yml contiene las credenciales de nuestra cuenta cloud a la que vincularse en este caso de snowflake, con la previa configuración en snowflake se obtienen los datos para el llenado del archivo
