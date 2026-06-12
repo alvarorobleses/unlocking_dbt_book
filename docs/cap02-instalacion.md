@@ -107,7 +107,7 @@ La base de datos actúa como el contenedor principal de todos los objetos relaci
 ### Crear el Esquema de Trabajo
 ```bash
 USE DATABASE DBT_LEARNING;
-CREATE SCHEMA ALVARO;
+CREATE SCHEMA YOUR_SCHEMA_HERE; 
 ```
 El esquema permite organizar los objetos dentro de la base de datos. Durante las primeras etapas del proyecto, dbt utilizará este esquema para crear modelos, seeds y otros recursos definidos en el proyecto.
 ### Verificar la Creación
@@ -139,12 +139,12 @@ my_first_dbt_project:
       account: YOUR_ACCOUNT_HERE
       database: dbt_learning
       password: YOUR_PASSWORD_HERE
-      role: dbt_transformer
+      role: DBT_EXECUTOR_ROLE
       schema: YOUR_NAME_HERE
       threads: 8
       type: snowflake
       user: YOUR_USER_HERE
-      warehouse: dbt
+      warehouse: COMPUTE_WH
 ```
 ### Archivo dbt_project.yml
 El archivo dbt_project.yml contiene las configuraciones generales del proyecto, también será necesario para probar si todo fue correcto, probaremos la siguiente configuración base para el proyecto
