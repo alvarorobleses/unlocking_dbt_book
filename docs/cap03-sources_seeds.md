@@ -1,29 +1,17 @@
 # Capítulo 3: Sources y Seeds
-
-## Objetivos de aprendizaje
-
-Al finalizar este capítulo serás capaz de:
-
-- Comprender qué son los Sources en dbt.
-- Definir fuentes de datos mediante archivos YAML.
-- Referenciar tablas fuente dentro de modelos dbt.
-- Configurar y ejecutar verificaciones de frescura de datos.
-- Comprender qué son los Seeds y cuándo utilizarlos.
-- Cargar archivos CSV al Data Warehouse mediante dbt.
-
 ---
 
 # ¿Qué son los Sources?
 
-Los Sources representan tablas existentes dentro del Data Warehouse desde las cuales dbt leerá información. A diferencia de los modelos, los Sources no son creados por dbt; simplemente permiten referenciar datos ya disponibles en la plataforma.
+Los Sources representan tablas existentes dentro del Data Warehouse desde las cuales dbt leerá información. Los Sources no son creados por dbt; simplemente permiten referenciar datos ya disponibles en la plataforma como snowflake.
 
 En lugar de escribir repetidamente el nombre de la base de datos, esquema y tabla dentro de cada consulta SQL, dbt permite definir estas ubicaciones una sola vez en un archivo YAML y reutilizarlas a lo largo del proyecto.
 
-Según las recomendaciones de *Unlocking dbt*, esta práctica mejora la mantenibilidad del proyecto y facilita la administración de múltiples entornos como desarrollo, pruebas y producción.
+Ésta práctica mejora la mantenibilidad del proyecto y facilita la administración de múltiples entornos como desarrollo, pruebas y producción.
 
 ---
 
-# Definiendo un Source
+## Definiendo un Source
 
 Por convención, los Sources suelen declararse dentro de un archivo YAML ubicado en el directorio `models`.
 
@@ -44,6 +32,7 @@ sources:
 
 En este ejemplo:
 
+- `version: 2` es la plantilla actual que usa dbt, siempre será la 2.
 - `raw` es el nombre lógico del Source.
 - `analytics` corresponde a la base de datos.
 - `raw` corresponde al esquema.
@@ -51,9 +40,7 @@ En este ejemplo:
 
 ---
 
-# Beneficios de utilizar Sources
-
-Utilizar Sources aporta varias ventajas:
+## Beneficios de utilizar Sources
 
 - Centralización de la configuración.
 - Mayor legibilidad del código.
@@ -66,7 +53,7 @@ Además, dbt incorpora automáticamente los Sources dentro del DAG del proyecto,
 
 ---
 
-# Referenciando Sources en Modelos
+## Referenciando Sources en Modelos
 
 Una vez definido un Source, puede utilizarse mediante la función `source()`.
 
@@ -76,12 +63,12 @@ Ejemplo:
 SELECT *
 FROM {{ source('raw', 'customers') }}
 ```
-
+La función source de Jinja reemplaza las partes de una sentencia SQL, la sintaxis:{{source('source name','table name')}}.
 Esta práctica evita el uso de nombres físicos directamente en el código SQL y permite que cualquier cambio en la ubicación de la tabla se realice únicamente en el archivo YAML.
 
 ---
 
-# Source Freshness
+## Source Freshness
 
 Una de las características más interesantes de los Sources es la posibilidad de verificar la frescura de los datos (*Source Freshness*).
 
@@ -93,7 +80,7 @@ Esto permite responder preguntas como:
 
 ---
 
-# Configurando Source Freshness
+## Configurando Source Freshness
 
 Ejemplo:
 
@@ -126,7 +113,7 @@ En este caso:
 
 ---
 
-# Ejecutando Verificaciones de Frescura
+## Ejecutando Verificaciones de Frescura
 
 Para ejecutar las validaciones se utiliza:
 
@@ -138,7 +125,7 @@ dbt analizará las tablas configuradas y generará un reporte indicando si cumpl
 
 ---
 
-# Sources en Múltiples Entornos
+## Sources en Múltiples Entornos
 
 Una de las razones principales para utilizar Sources es facilitar el trabajo con distintos entornos.
 
@@ -154,7 +141,7 @@ Esto reduce significativamente el esfuerzo de mantenimiento.
 
 ---
 
-# Generación de Sources
+## Generación de Sources
 
 Cuando existen muchas tablas fuente, crear manualmente el archivo YAML puede resultar tedioso.
 
@@ -171,11 +158,11 @@ Posteriormente, el desarrollador puede complementar dicha configuración con:
 
 # ¿Qué son los Seeds?
 
-Los Seeds son archivos CSV almacenados dentro del propio proyecto dbt.
+Los Seeds son archivos CSV almacenados dentro del propio proyecto dbt, estos no suelen actualizarse constantemente.
 
 A diferencia de los Sources, cuyos datos existen previamente en el Data Warehouse, los Seeds son cargados por dbt y convertidos en tablas.
 
-Los Seeds son especialmente útiles para almacenar pequeños conjuntos de datos estáticos.
+Los Seeds son especialmente útiles para almacenar pequeños conjuntos de datos estáticos, de hasta 1mb, normalmente pueden tener hasta 5000 filas, no se recomienda más.
 
 ---
 
@@ -189,7 +176,7 @@ Algunos ejemplos comunes son:
 - Catálogos de clasificación.
 - Listas de exclusión o inclusión.
 
-Según los autores, los Seeds deben utilizarse únicamente para información pequeña y relativamente estable.
+Los Seeds deben utilizarse únicamente para información pequeña y relativamente estable.
 
 ---
 
@@ -201,8 +188,6 @@ Los Seeds no son apropiados para:
 - Datos que cambian frecuentemente.
 - Exportaciones completas de sistemas transaccionales.
 - Información sensible o confidencial.
-
-Como regla general, el libro recomienda mantener los Seeds pequeños y fáciles de administrar.
 
 ---
 
@@ -267,14 +252,3 @@ FROM {{ ref('USStates') }}
 Desde la perspectiva de dbt, los Seeds se comportan de manera muy similar a los modelos.
 
 ---
-
-# Resumen
-
-En este capítulo se introdujeron dos componentes fundamentales de dbt:
-
-- **Sources**, que permiten gestionar de forma centralizada las tablas fuente utilizadas por los modelos.
-- **Seeds**, que permiten almacenar y versionar pequeños conjuntos de datos estáticos dentro del proyecto.
-
-Los Sources facilitan la mantenibilidad, documentación y monitoreo de los datos de entrada, mientras que los Seeds proporcionan una solución sencilla para administrar tablas de referencia directamente desde el repositorio del proyecto.
-
-En el siguiente capítulo se estudiarán los **Modelos (Models)**, considerados uno de los elementos más importantes dentro de la arquitectura de dbt.
