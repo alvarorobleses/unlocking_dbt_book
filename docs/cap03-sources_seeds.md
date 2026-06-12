@@ -63,7 +63,7 @@ Ejemplo:
 SELECT *
 FROM {{ source('raw', 'customers') }}
 ```
-La función source de Jinja reemplaza las partes de una sentencia SQL, la sintaxis:{{source('source name','table name')}}.
+La función source de Jinja reemplaza las partes de una sentencia SQL, sigue la sintaxis:{{source('source name', 'table name')}}.
 Esta práctica evita el uso de nombres físicos directamente en el código SQL y permite que cualquier cambio en la ubicación de la tabla se realice únicamente en el archivo YAML.
 
 ---
