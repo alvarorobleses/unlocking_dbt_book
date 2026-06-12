@@ -96,6 +96,31 @@ SELECT CURRENT_ACCOUNT(), CURRENT_REGION();
 SELECT CURRENT_ACCOUNT_NAME(), CURRENT_REGION(), SYSTEM$ALLOWLIST();
 ```
 
+## Creación de la Base de Datos y Esquema en Snowflake
+Una vez configurados el warehouse, el rol y el usuario, es necesario crear la base de datos y el esquema que utilizará dbt para almacenar los objetos generados durante el desarrollo.
+En este proyecto se utilizará la base de datos DBT_LEARNING y el esquema ALVARO.
+### Crear la Base de Datos
+```bash
+CREATE DATABASE DBT_LEARNING;
+```
+La base de datos actúa como el contenedor principal de todos los objetos relacionados con el proyecto, incluyendo esquemas, tablas, vistas y otros recursos administrados por dbt.
+### Crear el Esquema de Trabajo
+```bash
+USE DATABASE DBT_LEARNING;
+CREATE SCHEMA ALVARO;
+```
+El esquema permite organizar los objetos dentro de la base de datos. Durante las primeras etapas del proyecto, dbt utilizará este esquema para crear modelos, seeds y otros recursos definidos en el proyecto.
+### Verificar la Creación
+Comprobar que la base de datos existe:
+```bash
+SHOW DATABASES LIKE 'DBT_LEARNING';
+```
+Comprobar que el esquema fue creado correctamente:
+```bash
+SHOW SCHEMAS IN DATABASE DBT_LEARNING;
+```
+La configuración del archivo profiles.yml debe coincidir con los objetos creados en Snowflake:
+
 ## Flujo para inicializar el proyecto y comando debug
 Para inicializar el proyecto, crear las carpetas y archivos por defecto realizaremos:
 ```bash
