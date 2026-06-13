@@ -23,16 +23,16 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 - Permite pruebas de calidad de datos.
 - Fomenta buenas prácticas de ingeniería (versionado, modularidad, testing).
 
-## Notas personales
+## Notas
 
 > Debemos hacernos unas preguntas antes de decidir crear un warehouse, podemos considerarlo si nuestras respuestas dan 'si' en cada una de las siguientes preguntas:
 
-1. Is it important to have a single source of truth for your data?
-2. Are multiple areas of the business going to be consuming this data?
-3. Do we need to analyze data from different sources?
-4. Do we need to maintain historical tracking of data and make sure we are looking at measurables from a point in time?
-5. Do you have a high volume of data that needs to be transformed?
-6. Do you find yourself running a lot of complex queries regularly?
+1. ¿Es importante tener una única fuente de verdad para sus datos?
+2. ¿Van a consumir estos datos múltiples áreas del negocio?
+3. ¿Necesitamos analizar datos procedentes de diferentes fuentes?
+4. ¿Necesitamos mantener un historial de seguimiento de los datos y asegurarnos de que estamos observando mediciones desde un punto específico en el tiempo?
+5. ¿Tiene un gran volumen de datos que necesita ser transformado?
+6. ¿Se encuentra ejecutando con frecuencia muchas consultas complejas?
 
 
 *Fuente: Unlocking dbt — Capítulo 1*
