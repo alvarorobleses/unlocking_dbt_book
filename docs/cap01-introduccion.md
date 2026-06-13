@@ -1,9 +1,9 @@
-# Capítulo 1 — Introducción a dbt
+# Capítulo 1: Introducción a dbt
 
 ## ¿Qué es dbt?
 
-dbt (data build tool) es una herramienta de transformación de datos que permite a los analistas y data engineers transformar datos en su data warehouse usando SQL.
-
+dbt (data build tool) es una herramienta de transformación de datos que permite construir pipelines ELT utilizando SQL y buenas prácticas de ingeniería de software.
+A diferencia de las herramientas ETL tradicionales, dbt no extrae ni carga datos. Su función principal es transformar datos que ya se encuentran almacenados en un Data Warehouse
 El flujo básico es:
 ```
 Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas limpias
@@ -15,6 +15,7 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 - **dbt Cloud**: versión SaaS con interfaz web, CI/CD y más funcionalidades.
 - **Adaptador**: cómo dbt se conecta al data warehouse (Snowflake, BigQuery, Redshift, etc.).
 - **Modelo**: un archivo `.sql` que define una transformación. dbt lo convierte en una tabla o vista.
+- **Motor Fusion:** A través de la adquisición de SDF Labs, dbt ha introducido "Fusion", un nuevo motor de ejecución escrito en Rust que reemplaza al motor original en Python. Fusion mejora drásticamente la velocidad de compilación, ofrece validación de SQL en tiempo real y potencia funciones inteligentes de autocompletado en el IDE.
 
 ## ¿Por qué dbt?
 
@@ -23,17 +24,27 @@ Fuente de datos → Data Warehouse (raw) → dbt transforma → tablas/vistas li
 - Permite pruebas de calidad de datos.
 - Fomenta buenas prácticas de ingeniería (versionado, modularidad, testing).
 
-## Notas
+## ¿Cuándo tiene sentido implementar un Data Warehouse?
 
-> Debemos hacernos unas preguntas antes de decidir crear un warehouse, podemos considerarlo si nuestras respuestas dan 'si' en cada una de las siguientes preguntas:
+> Si la respuesta es sí para la mayoría de ellas, probablemente un Data Warehouse aporte valor al negocio.
 
-1. ¿Es importante tener una única fuente de verdad para sus datos?
-2. ¿Van a consumir estos datos múltiples áreas del negocio?
-3. ¿Necesitamos analizar datos procedentes de diferentes fuentes?
-4. ¿Necesitamos mantener un historial de seguimiento de los datos y asegurarnos de que estamos observando mediciones desde un punto específico en el tiempo?
-5. ¿Tiene un gran volumen de datos que necesita ser transformado?
-6. ¿Se encuentra ejecutando con frecuencia muchas consultas complejas?
+- ¿Es importante tener una única fuente de verdad para los datos?
+- ¿Los datos serán consumidos por múltiples áreas del negocio?
+- ¿Necesitamos integrar información procedente de diferentes sistemas?
+- ¿Necesitamos mantener histórico y trazabilidad de los datos?
+- ¿Existe un gran volumen de datos que requiere transformaciones frecuentes?
+- ¿Se ejecutan habitualmente consultas complejas o analíticas?
 
+## Estructura de un Proyecto de dbt
+Cuando inicializas un proyecto, dbt crea carpetas predeterminadas con propósitos muy específicos:
+* **models/:** El corazón del proyecto. Contiene los archivos `.sql` con la lógica de la transformación.
+* **seeds/:** Almacena archivos CSV estáticos y pequeños (usualmente mapeos o catálogos como códigos de países) que dbt carga directamente a tu base de datos.
+* **snapshots/:** Crea un registro histórico de cómo cambian los datos a lo largo del tiempo.
+* **tests/:** Archivos con consultas SQL que verifican la precisión e integridad de los datos en tus modelos.
+* **macros/:** Contiene bloques de código Jinja reutilizables.
+* **dbt_packages/:** Donde se descargan paquetes de dependencias creados por la comunidad.
+* **target/:** Directorio autogenerado que almacena metadatos compilados (como `manifest.json`) y el SQL crudo que dbt enviará a tu almacén de datos.
+* **analyses/ y logs/:** Analíticas puntuales que no se materializan, y registros de depuración, respectivamente.
 
 *Fuente: Unlocking dbt — Capítulo 1*
 
@@ -70,3 +81,6 @@ git push origin main
 - En permisos marca solo repo (el primero)
 - Clic en Generate token
 - Copia el token inmediatamente — solo se muestra una vez
+
+⚠️ GitHub solo muestra el token una única vez.
+
