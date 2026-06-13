@@ -1,3 +1,5 @@
+Traducción y documentación de Unlocking dbt 2nd Edition al español. Nació de la frustración de encontrar recursos técnicos de calidad solo en inglés. Si estás aprendiendo ingeniería de datos desde Latinoamérica, este repositorio es para ti.
+
 # 📦 My First dbt Project
 
 Proyecto de aprendizaje siguiendo el libro **Unlocking dbt**, con implementación práctica usando dbt Core + Snowflake. Se usa **uv** como gestor moderno de entornos y paquetes en lugar del pip clásico.
