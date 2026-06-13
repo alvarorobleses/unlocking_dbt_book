@@ -2,8 +2,7 @@
 
 Proyecto de aprendizaje siguiendo el libro **Unlocking dbt**, con implementación práctica usando dbt Core + Snowflake. Se usa **uv** como gestor moderno de entornos y paquetes en lugar del pip clásico.
 
-<img width="312" height="445" alt="imagen" src="https://github.com/user-attachments/assets/672402d1-2535-4b6e-95cf-f25be9814be3" />
-
+<img width="827" height="1180" alt="imagen" src="https://github.com/user-attachments/assets/85757b41-4d98-45b2-b371-afc886b07ee9" />
 
 ---
 
