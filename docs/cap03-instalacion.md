@@ -1,4 +1,4 @@
-# Capítulo 2 — Instalación y configuración
+# Capítulo 3 — Instalación y configuración
 
 ## Lo que propone el libro
 
