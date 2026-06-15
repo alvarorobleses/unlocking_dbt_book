@@ -71,16 +71,20 @@ Qué necesita medir y analizar la empresa, es el paso más crucial, un modelo bi
 Este es un ciclo interminable que siempre está en curso, las cosas cambian a menudo, asegurarse de comunicarse frecuentemente para comprender los cambios.
 
 ```bash
+Preguntas base de ejemplo, se recomienda adaptarlas al negocio en cuestión.
 * ¿Qué datos necesita para poder alcanzar sus metas y objetivos empresariales?
-* ¿Qué define el éxito para su equipo?
-* ¿Qué tipo de datos ayudaría a que su equipo tuviera más éxito?
 * ¿Qué preguntas basadas en datos son más importantes para su equipo?
-* ¿Cuál es la granularidad y frecuencia de datos requeridas?
-* ¿Qué elementos de datos son importantes para que pueda segmentar y analizar la información?
 * ¿Qué métricas clave o  KPI está buscando?
-* ¿Hasta qué punto en el tiempo necesita los datos?
-* ¿Cómo vas a consumir los datos (dashboards, informes, consultas ad hoc, etc?
 ```
+
+
+<img width="1200" height="423" alt="imagen" src="https://github.com/user-attachments/assets/cb1854df-5af2-47af-bb1c-fc04666bcae4" />
+<br>
+<em>Figura. Data Model - BUS Matrix .</em>
+<br>
+<br>
+
+
 
 ### 2. **Determinar la prioridad del mart(área funcional que necesita los datos) y por dónde empezar**
 3. **Traducir los requisitos del negocio a requisitos técnicos**
