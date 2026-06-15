@@ -1,36 +1,44 @@
 # Capítulo 2: Modelado de Datos
 El modelado de datos es el diseño mediante el cual estructuraremos los datos para guardarse y consultarse efectivamente, antes de escribir cualquier código en dbt, es importante definir como se estructurarán los datos, ya que corregir una mala arquitectura posteriormente requiere un esfuerzo significativo.
-
 ## Tipos de Modelos de Datos
 Existen diversas formas de modelar los datos para una empresa, cada una con un nivel diferente de **normalización** (reducción de redundancia, más usado para transacciones, enfocado en la operatividad) o **desnormalización** (optimización de lectura y consulta, enfocado en el análisis de datos):
-
 <br>
-
 <img width="926" height="159" alt="imagen" src="https://github.com/user-attachments/assets/00ea7f34-d267-425d-9b31-166c04eeed91" />
-<em>Figura: Vista de modelos de datos en una escala de normalización. <br> Recuperado de Unlocking dbt, Second Edition</em>
-
 <br>
-
-
+<em>Figura: Vista de modelos de datos en una escala de normalización. <br> Recuperado de Unlocking dbt, Second Edition</em>
+<br>
 <br>
 
 * **Data Vault o DV 2.0:** Enfatiza la escalabilidad, flexibilidad y auditoría. Está altamente normalizado y se compone de *Hubs*, *Satellites* y *Links*. Es excelente para rastrear auditorías, pero su escritura es compleja y su lectura lenta, por lo que no se recomienda para reportes directos.
+
 <img width="802" height="471" alt="imagen" src="https://github.com/user-attachments/assets/309cae69-44a8-47ab-8cc1-db9eef61047b" />
-Figura. Modelado con Data Vault 2.0. Nota. Imagen generada por IA mediante Claude (Anthropic)
+<br>
+<em>Figura. Modelado con Data Vault 2.0. Nota. Imagen generada por IA mediante Claude (Anthropic)</em>
+<br>
+<br>
 
-* **Tercera Forma Normal (3NF / Relacional / Inmon):** Estructura que elimina datos duplicados y dependencias. Es ideal para sistemas transaccionales porque optimiza la escritura rápida, pero las consultas de lectura suelen ser complejas y lentas, destaca que cada tabla tiene exactamente una responsabilidad, por ejemplo la tabla clientes solo sabe de clientes, no encontraremos el nombre de su país, ese dato se hallará en la tabla ciudad. 
+* **Tercera Forma Normal (3NF / Relacional / Inmon):** Estructura que elimina datos duplicados y dependencias. Es ideal para sistemas transaccionales porque optimiza la escritura rápida, pero las consultas de lectura suelen ser complejas y lentas, destaca que cada tabla tiene exactamente una responsabilidad, por ejemplo la tabla clientes solo sabe de clientes, no encontraremos el nombre de su país, ese dato se hallará en la tabla ciudad.
+
 <img width="712" height="760" alt="imagen" src="https://github.com/user-attachments/assets/4c6d5d07-b4a7-43b0-806e-a96ffb51651e" />
-Figura. Modelado con 3NF Nota. Imagen generada por IA mediante Claude (Anthropic)
+<br>
+<em>Figura. Modelado con 3NF. Nota. Imagen generada por IA mediante Claude (Anthropic)</em>
+<br>
+<br>
 
-* **Dimensional (Esquema Estrella / Kimball):** Diseñado específicamente para optimizar lecturas y generación de reportes. Divide la información en tablas de hechos o *fact tables* (datos cuantitativos), la cual es la tabla que va en el centro de la estrella y de la que salen las tablas de dimensiones o *dimensional tables* (información que describe la fact table, como por ejemplo la descripción de un producto).
+* **Dimensional (Esquema Estrella / Kimball / Star schema):** Diseñado específicamente para optimizar lecturas y generación de reportes. Divide la información en tablas de hechos o *fact tables* (datos cuantitativos), la cual es la tabla que va en el centro de la estrella y de la que salen las tablas de dimensiones o *dimensional tables* (información que describe la fact table, como por ejemplo la descripción de un producto).
+
 <img width="900" height="578" alt="imagen" src="https://github.com/user-attachments/assets/348e9e94-6a2c-41d0-abd8-5b9c7ccc2ff7" />
-Figura. Modelado Star Schema Imagen generada por IA mediante Claude (Anthropic)
+<br>
+<em>Figura. Modelado Star Schema. Imagen generada por IA mediante Claude (Anthropic)</em>
+<br>
+<br>
 
 * **One Big Table (OBT):** Consiste en tener todos los datos necesarios en una sola y enorme tabla. Las consultas son extremadamente rápidas porque no hay "joins", pero tiene una alta tasa de redundancia y es muy difícil de escalar a medida que el negocio crece.
 
-<br>
-
-El modelado dimensional es el más usado en el libro, debido a que dbt se utiliza para procesamiento por lotes y flujos programados, funciona bien con este modelado.
+### Notas
+* El modelado dimensional es el recomendado por los autores en el desarrollo del libro, debido al rendimiento que tiene con las características de dbt, también se menciona que el modelado se debe ajustar al negocio y cualquiera puede ser programado en la herramienta.
+* Por ejemplo, una empresa de servicios financieros altamente regulada podría beneficiarse de un modelo Data Vault debido a su capacidad de auditoría y trazabilidad histórica. Una empresa de comercio electrónico que necesita construir una tienda operativa central podría preferir un enfoque 3NF para organizar los datos transaccionales. Un equipo de análisis minorista que crea paneles para ejecutivos probablemente se beneficiaría más de un modelo dimensional. Y una startup que se mueve rápido y opera de forma ajustada puede optar por una estructura One Big Table para acelerar la entrega sin la sobrecarga inicial del modelado.
+* Es válido también el enfoque de utilizar cada modelado en una capa distinta de dbt por ejemplo, realizar implementaciones en las que la capa de staging/raw es transaccional, la capa intermedia es un data vault y la capa final es un modelo dimensional.
 
 ## El Modelo Dimensional: El estándar para dbt
 dbt brilla y prospera cuando se utiliza para desarrollar modelos dimensionales[cite: 1]. Este enfoque es considerado el estándar de oro en almacenes de datos (Data Warehouses) por sus múltiples beneficios[cite: 1]:
