@@ -2,6 +2,7 @@
 El modelado de datos es el diseño mediante el cual estructuraremos los datos para guardarse y consultarse efectivamente, antes de escribir cualquier código en dbt, es importante definir como se estructurarán los datos, ya que corregir una mala arquitectura posteriormente requiere un esfuerzo significativo.
 ## Tipos de Modelos de Datos
 Existen diversas formas de modelar los datos para una empresa, cada una con un nivel diferente de **normalización** (reducción de redundancia, más usado para transacciones, enfocado en la operatividad) o **desnormalización** (optimización de lectura y consulta, enfocado en el análisis de datos):
+
 <br>
 <img width="926" height="159" alt="imagen" src="https://github.com/user-attachments/assets/00ea7f34-d267-425d-9b31-166c04eeed91" />
 <br>
