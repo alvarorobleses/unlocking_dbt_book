@@ -38,7 +38,7 @@ Existen diversas formas de modelar los datos para una empresa, cada una con un n
 ### Notas
 * El modelado dimensional es el recomendado por los autores en el desarrollo del libro, debido al rendimiento que tiene con las características de dbt, también se menciona que el modelado se debe ajustar al negocio y cualquiera puede ser programado en la herramienta.
 * Por ejemplo, una empresa de servicios financieros altamente regulada podría beneficiarse de un modelo Data Vault debido a su capacidad de auditoría y trazabilidad histórica. Una empresa de comercio electrónico que necesita construir una tienda operativa central podría preferir un enfoque 3NF para organizar los datos transaccionales. Un equipo de análisis minorista que crea paneles para ejecutivos probablemente se beneficiaría más de un modelo dimensional. Y una startup que se mueve rápido y opera de forma ajustada puede optar por una estructura One Big Table para acelerar la entrega sin la sobrecarga inicial del modelado.
-* Es válido también el enfoque de utilizar cada modelado en una capa distinta de dbt por ejemplo, realizar implementaciones en las que la capa de staging/raw es transaccional, la capa intermedia es un data vault y la capa final es un modelo dimensional.
+* Es válido también el enfoque de utilizar cada modelado en una capa distinta de dbt por ejemplo, la capa de staging/raw es transaccional, la capa intermedia es un data vault y la capa final es un modelo dimensional.
 
 ## El Modelo Dimensional: El estándar para dbt
 dbt brilla y prospera cuando se utiliza para desarrollar modelos dimensionales[cite: 1]. Este enfoque es considerado el estándar de oro en almacenes de datos (Data Warehouses) por sus múltiples beneficios[cite: 1]:
