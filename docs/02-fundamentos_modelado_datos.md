@@ -77,6 +77,7 @@ Preguntas base de ejemplo, se recomienda adaptarlas al negocio en cuestión.
 * ¿Qué métricas clave o  KPI está buscando?
 ```
 
+Debemos traducir la información recopilada en un modelo técnico que respalde los siguientes procesos, para ello se puede tomar de referencia la matriz bus, en la que se puede organizar y alinear los procesos del negocio con los hechos (facts) y dimensiones del esquema de estrella.
 
 <img width="1200" height="423" alt="imagen" src="https://github.com/user-attachments/assets/cb1854df-5af2-47af-bb1c-fc04666bcae4" />
 <br>
@@ -84,9 +85,8 @@ Preguntas base de ejemplo, se recomienda adaptarlas al negocio en cuestión.
 <br>
 <br>
 
+### 2. **Determinar la prioridad del mart y por donde empezar**
 
-
-### 2. **Determinar la prioridad del mart(área funcional que necesita los datos) y por dónde empezar**
 3. **Traducir los requisitos del negocio a requisitos técnicos**
 4. **Determinar los hechos y dimensiones:** Identificar los datos clave medibles y los atributos descriptivos en el modelo.
 5. **Validar el diseño:** Asegurar que el modelo se alinee con la lógica empresarial y los requisitos de informe.
